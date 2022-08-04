@@ -9,14 +9,11 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: null,
-        title: Center(
-          child: Text(
-            "Settings",
-            //textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(126,131, 137, 1),
-            ),
+        centerTitle: true,
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            color: Color.fromRGBO(126,131, 137, 1),
           ),
         ),
       ),

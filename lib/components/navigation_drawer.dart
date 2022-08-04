@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiffin/components/menu_items.dart';
 import 'package:tiffin/components/user_page.dart';
 import 'package:tiffin/screens/about_us/about_us_screen.dart';
 import 'package:tiffin/screens/cancellation_policy/cancellation_policy_screen.dart';
@@ -10,130 +11,120 @@ import 'package:tiffin/screens/settings/settings_screen.dart';
 class NavigationDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String name ="Akshika Mittal";
-    final int customerId = 123456;
-    final int mobileNo=123456;
-    final String address="sd546b72xzz";
+    final String name = "Akshika Mittal";
+    final String customerId = 'INR123456';
+    final int mobileNo = 123456;
+    final String address = "610/304/1, Dariyabad Allahabad dfghjkmoiuygfdswertgyhujikoiuyhgfcdxder5t6y78u9i0ijuh";
     final urlImage =
         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80';
-    return Drawer(
+    return SingleChildScrollView(
       child: Container(
-        child: Material(
-          color: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            children: <Widget>[
-              buildHeader(
-                urlImage: urlImage,
-                name:name,
-                //customerId:customerId,
-                //mobileNo:mobileNo,
-                //address: address,
-                onClicked:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserPage(name:name,urlImage:urlImage),
-              ),),),
-              SizedBox(
-                height: 30,
-              ),
-              buildMenuItem(
-                  text: 'Orders',
-                  onClicked: () => selectedItem(context,0),
-                  //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Payment History',
-                onClicked: () => selectedItem(context,1),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Credit',
-                onClicked: () => selectedItem(context,2),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Settings',
-                onClicked: () => selectedItem(context,3),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Submit Feedback',
-                onClicked: () => selectedItem(context,4),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'About Us',
-                onClicked: () => selectedItem(context,5),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Customer Support',
-                onClicked: () => selectedItem(context,6),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              buildMenuItem(
-                text: 'Cancellation Policy',
-                onClicked: () => selectedItem(context,7),
-                //icon: Icons.people,
-              ),
-              SizedBox(
-                height: 70,
-              ),
-              buildMenuItem(
-                text: 'Logout',
-                onClicked: () => selectedItem(context,8),
-                //icon: Icons.people,
-              ),
-            ],
-          ),
+        width: MediaQuery.of(context).size.width * 0.60,
+        color: Color.fromRGBO(230, 230, 230, 1.0),
+        padding: EdgeInsets.only(top: 70, left: 20, right: 20),
+        child: Column(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width * 0.50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(urlImage),
+                            ),
+                          ),
+                          SizedBox(width: 20,),
+                          Flexible(
+                            child: Card(
+                              elevation: 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(name, style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  )),
+                                  Text(customerId),
+                                  SizedBox(
+                                    width: 20,),
+                                  Divider(
+                                    color: Colors.grey,
+                                    thickness: 2,
+                                    //height: 3
+                                  ),
+                                  Text(mobileNo.toString()),
+                                  Divider(color: Colors.grey, thickness: 2,),
+                                  Text(address),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+            ),
+            SizedBox(height: 30,),
+            Column(
+              children: drawerItems.map((element) => Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white,
+                         ),
+                         padding: EdgeInsets.only(left: 10, right: 10),
+                         height: 50,
+                         child:MaterialButton(
+                           onPressed:(){
+                            selectedItem(context, element['route']);
+                           },
+                           child: Row(
+                            children:[
+                              Icon(element['icon'],color: Color.fromRGBO(199, 199, 199, 1.0),),
+                              SizedBox(width:5,),
+                              Text(element['title'],style: TextStyle( color: Colors.black, fontSize: 16),),]
+                             ),
+                         ),
+                      ),
+                    ],
+                  ),
+                  SizedBox( height: 10,)
+                ],
+               ),
+              ).toList(),
+            ),
+            SizedBox(
+              height: 70,),
+          ],
         ),
       ),
     );
   }
 
-  Widget buildMenuItem({
-    required String text,
-    VoidCallback? onClicked,
-    //required IconData icon,
-}){
-    final color=Colors.black;
-    final hoverColor = Colors.white70;
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      //leading: Icon(icon,color:color),
-      title: Text(text,style:TextStyle(color:color)),
-      hoverColor: hoverColor,
-      onTap: onClicked,
-    );
-  }
 
   void selectedItem(BuildContext context, int index){
     Navigator.of(context).pop();
     switch(index){
       case 0:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordScreen(),
-      ));
+        ));
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen(),

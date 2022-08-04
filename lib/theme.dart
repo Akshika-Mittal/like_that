@@ -6,7 +6,7 @@ ThemeData theme(){
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
     primarySwatch: Colors.red,
-    fontFamily: "Muli",
+    fontFamily: "SansPro",
     appBarTheme: appBarTheme(),
     textTheme: themeText(),
     inputDecorationTheme: inputDecorationTheme(),
@@ -47,13 +47,21 @@ AppBarTheme appBarTheme() {
     color: Colors.white,
     elevation: 0,
     brightness: Brightness.light,
-    // iconTheme: IconThemeData(
-    //   color: Colors.black,),
+    iconTheme: IconThemeData(
+      color: Colors.black,),
     textTheme: TextTheme(
-      headline6:TextStyle(
-        color:Color(0xFF888888),
+      headline1: TextStyle(
+        color: Color(0xFF888888),
         fontSize: 18,
       ),
     ),
   );
 }
+
+// CheckboxTheme checkboxTheme(){
+//   return checkboxTheme(
+//     shape:RoundedRectangleBorder(
+//       borderRadius: BorderRadius.circular(100),
+//     )
+//   );
+// }

@@ -11,6 +11,8 @@ import 'package:tiffin/screens/sign_up/sign_up_screen.dart';
 import 'package:tiffin/screens/splash/splash_screen.dart';
 import 'screens/complete_profile/complete_profile_screen.dart';
 import 'screens/otp/otp_screen.dart';
+import 'screens/settings/components/account_setting/sccount_setting_screen.dart';
+import 'screens/settings/components/notification_preferences/notification_preferences_screen.dart';
 
 final Map<String,WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
@@ -25,4 +27,6 @@ final Map<String,WidgetBuilder> routes = {
   AboutUs.routeName : (context) => AboutUs(),
   CancelationPolicy.routeName : (context) => CancelationPolicy(),
   SettingsScreen.routeName : (context) => SettingsScreen(),
+  NotificationPreferenceScreen.routeName : (context) => NotificationPreferenceScreen(),
+  AccountSettingScreen.routeName : (context) => AccountSettingScreen(),
 };
