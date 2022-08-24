@@ -11,8 +11,19 @@ import 'package:tiffin/screens/sign_up/sign_up_screen.dart';
 import 'package:tiffin/screens/splash/splash_screen.dart';
 import 'screens/complete_profile/complete_profile_screen.dart';
 import 'screens/otp/otp_screen.dart';
+import 'screens/polling/menu_selection/menu_selection_screen.dart';
+import 'screens/polling/polling_result/components/polling_recommendation.dart';
+import 'screens/polling/polling_result/result_accepted_screen.dart';
+import 'screens/settings/components/account_setting/components/anything_else.dart';
+import 'screens/settings/components/account_setting/components/app_issue.dart';
+import 'screens/settings/components/account_setting/components/change_email.dart';
+import 'screens/settings/components/account_setting/components/delete_account.dart';
+import 'screens/settings/components/account_setting/components/dont_want_to_use.dart';
 import 'screens/settings/components/account_setting/sccount_setting_screen.dart';
 import 'screens/settings/components/notification_preferences/notification_preferences_screen.dart';
+import 'screens/subscription_plan/components/goal.dart';
+import 'screens/subscription_plan/components/silver.dart';
+import 'screens/subscription_plan/subscription_plan_screen.dart';
 
 final Map<String,WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
@@ -29,4 +40,15 @@ final Map<String,WidgetBuilder> routes = {
   SettingsScreen.routeName : (context) => SettingsScreen(),
   NotificationPreferenceScreen.routeName : (context) => NotificationPreferenceScreen(),
   AccountSettingScreen.routeName : (context) => AccountSettingScreen(),
+  ChangeEmail.routeName : (context) => ChangeEmail(),
+  DeleteAccount.routeName : (context) => DeleteAccount(),
+  DontWantTo.routeName : (context) => DontWantTo(),
+  AppIssue.routeName : (context) => AppIssue(),
+  AnythingElse.routeName : (context) => AnythingElse(),
+  SubscriptionPlanScreen.routeName : (context) => SubscriptionPlanScreen(),
+  Silver.routeName : (context) => Silver(),
+  MenuSelection.routeName : (context) => MenuSelection(),
+  Goal.routeName : (context) => Goal(),
+  ResultAcceptedScreen.routeName : (context) => ResultAcceptedScreen(),
+  PollingRecommendation.routeName : (context) => PollingRecommendation(),
 };

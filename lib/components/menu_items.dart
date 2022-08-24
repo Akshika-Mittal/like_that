@@ -32,12 +32,12 @@ List<Map> drawerItems=[
   },
   {
     'icon' :IconData(0xf403, fontFamily: 'MaterialIcons'),
-    'title': 'Customer Support',
+    'title': 'Customer',
     'route': 6,
   },
   {
     'icon' :IconData(0xef28, fontFamily: 'MaterialIcons'),
-    'title': 'Cancellation Policy',
+    'title': 'Cancellation ',
     'route': 7,
   },{
     'icon' :IconData(0xeaac, fontFamily: 'MaterialIcons'),

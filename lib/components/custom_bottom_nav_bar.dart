@@ -3,6 +3,7 @@ import 'package:tiffin/constants.dart';
 import 'package:tiffin/enums.dart';
 import 'package:tiffin/screens/about_us/about_us_screen.dart';
 import 'package:tiffin/screens/home/home_screen.dart';
+import 'package:tiffin/screens/polling/polling_result/result_accepted_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
 
@@ -53,7 +54,7 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed:(){},
+              onPressed:()=> Navigator.pushNamed(context,ResultAcceptedScreen.routeName),
               icon: Icon(
                 Icons.person,
                 color: MenuState.profile == selectedMenu?kPrimaryColor:Colors.black,

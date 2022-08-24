@@ -5,7 +5,9 @@ import 'package:tiffin/screens/about_us/about_us_screen.dart';
 import 'package:tiffin/screens/cancellation_policy/cancellation_policy_screen.dart';
 import 'package:tiffin/screens/customer_support/customer_support_screen.dart';
 import 'package:tiffin/screens/forgot_password/forgot_password_screen.dart';
+import 'package:tiffin/screens/polling/menu_selection/menu_selection_screen.dart';
 import 'package:tiffin/screens/settings/settings_screen.dart';
+import 'package:tiffin/screens/subscription_plan/subscription_plan_screen.dart';
 
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -123,11 +125,11 @@ class NavigationDrawerWidget extends StatelessWidget {
     Navigator.of(context).pop();
     switch(index){
       case 0:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ForgotPasswordScreen(),
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SubscriptionPlanScreen(),
         ));
         break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen(),
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>MenuSelection(),
         ));
         break;
       case 2:

@@ -9,9 +9,9 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: null,
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        //leading: null,
+        title:Text(
             "About Us",
             //textAlign: TextAlign.center,
             style: TextStyle(
@@ -19,7 +19,6 @@ class AboutUs extends StatelessWidget {
             ),
           ),
         ),
-      ),
       body: Body(),
     );
   }

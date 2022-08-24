@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tiffin/constants.dart';
+import 'package:tiffin/screens/settings/components/account_setting/components/change_email.dart';
+import 'package:tiffin/screens/settings/components/account_setting/components/delete_account.dart';
+import 'package:tiffin/screens/settings/components/notification_preferences/notification_preferences_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static String routeName ="/AccountSetting";
@@ -29,9 +32,12 @@ class AccountSettingScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.70,
                 ),
-                Icon(
-                    Icons.keyboard_arrow_right_rounded,
-                  color: kPrimaryColor,
+                GestureDetector(
+                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChangeEmail()));},
+                  child: Icon(
+                      Icons.keyboard_arrow_right_rounded,
+                    color: kPrimaryColor,
+                  ),
                 ),
 
               ],
@@ -46,9 +52,12 @@ class AccountSettingScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.68,
                 ),
-                Icon(
-                  Icons.keyboard_arrow_right_rounded,
-                  color: kPrimaryColor,
+                GestureDetector(
+                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>DeleteAccount()));},
+                  child: Icon(
+                    Icons.keyboard_arrow_right_rounded,
+                    color: kPrimaryColor,
+                  ),
                 ),
 
               ],

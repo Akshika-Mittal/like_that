@@ -9,9 +9,8 @@ class CancelationPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: null,
-        title: Center(
-          child: Text(
+        centerTitle: true,
+        title:Text(
             "Cancellation/Refund Policy",
             //textAlign: TextAlign.center,
             style: TextStyle(
@@ -19,7 +18,6 @@ class CancelationPolicy extends StatelessWidget {
             ),
           ),
         ),
-      ),
       body: Body(),
     );
   }
