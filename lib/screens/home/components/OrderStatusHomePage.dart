@@ -10,7 +10,6 @@ class OrderStatusHomeScreen
   OrderStatusHomeScreen(this.icon,this.color,this.active,this.title,this.description);
 
 }
-
 class OrderStatusHomeScreenControl
 {
   List<OrderStatusHomeScreen> OrderStatusCurrent=[

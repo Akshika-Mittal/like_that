@@ -1,47 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/default_button.dart';
-import 'package:tiffin/screens/settings/settings_screen.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/default_button.dart';
+import 'package:tiffin/widgets/divider_widget.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/screen_heading.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
+import 'package:tiffin/screens/settings/components/account_setting/components/final_delete.dart';
 
 class DontWantTo extends StatelessWidget {
   static String routeName = "/dont_want_to";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Delete Account",
-          style: TextStyle(
-            color: Color.fromRGBO(126, 131, 137, 1),
-          ),
-        ),
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(Dimensions.appBarPrefferedHeight),
+        child: Screen_Heading(text: 'Delete Account',),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.symmetric(vertical: Dimensions.height12,horizontal: Dimensions.width12),
         child: Column(
           children: <Widget>[
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
-            Text("I don\'t want to use Tiff service anymore"),
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
+            DividerWidget(),
+            SizedBox(height: Dimensions.height20,),
+            HeadingText(text: 'Anything else you would like to add?'),
+            SubHeadingText(text:"Do you have feedback for us? We would love to hear from you!"),
+            SizedBox(height: Dimensions.height10,),
+            DividerWidget(),
             Spacer(),
             Padding(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.symmetric(vertical: Dimensions.height30,horizontal: Dimensions.width30),
               child: DefaultButton(
                 text: "Next",
                 press: () {
-                  Navigator.pushNamed(context, SettingsScreen.routeName);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>FInalDelete()));
                 },
               ),
             ),
             SizedBox(
-              height: 30,
+              height: Dimensions.height30,
             ),
           ],
         ),

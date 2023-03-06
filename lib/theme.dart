@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tiffin/utils/AppColors.dart';
 
-import 'constants.dart';
+import 'utils/constants.dart';
 
 ThemeData theme(){
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    primarySwatch: Colors.red,
-    fontFamily: "Muli",
+    //primarySwatch: Colors.red,
+    fontFamily: "SansPro",
     appBarTheme: appBarTheme(),
     textTheme: themeText(),
     inputDecorationTheme: inputDecorationTheme(),
@@ -16,7 +17,7 @@ ThemeData theme(){
 
 InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder =OutlineInputBorder(
-    borderRadius: BorderRadius.circular(15),
+    //borderRadius: BorderRadius.circular(15),
     borderSide: BorderSide(color: kTextColor),
     gapPadding: 10,
   );

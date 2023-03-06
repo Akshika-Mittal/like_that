@@ -1,75 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/constants.dart';
+import 'package:tiffin/utils/AppColors.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/divider_widget.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/screen_heading.dart';
 import 'package:tiffin/screens/settings/components/account_setting/components/change_email.dart';
 import 'package:tiffin/screens/settings/components/account_setting/components/delete_account.dart';
-import 'package:tiffin/screens/settings/components/notification_preferences/notification_preferences_screen.dart';
-
+import 'package:tiffin/utils/size_config.dart';
 class AccountSettingScreen extends StatelessWidget {
   static String routeName ="/AccountSetting";
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Account Settings",
-          style: TextStyle(
-            color: Color.fromRGBO(126,131, 137, 1),
-          ),
-        ),
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(Dimensions.appBarPrefferedHeight),
+        child: Screen_Heading(text: 'Account Settings',),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(vertical: Dimensions.height8,horizontal: Dimensions.width8),
         child: Column(
           children: <Widget>[
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
-            Row(
-              children: <Widget>[
-                Text("Change Email"),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.70,
-                ),
-                GestureDetector(
-                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChangeEmail()));},
-                  child: Icon(
-                      Icons.keyboard_arrow_right_rounded,
-                    color: kPrimaryColor,
-                  ),
-                ),
-
-              ],
-            ),
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
-            Row(
-              children: <Widget>[
-                Text("Delete Account"),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.68,
-                ),
-                GestureDetector(
-                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>DeleteAccount()));},
-                  child: Icon(
-                    Icons.keyboard_arrow_right_rounded,
-                    color: kPrimaryColor,
-                  ),
-                ),
-
-              ],
-            ),
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
+            DividerWidget(),
+            ChoiceMaker(text: 'Change Email',onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ChangeEmail()));},),
+            DividerWidget(),
+            ChoiceMaker(text: 'Delete Account',onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>DeleteAccount()));},),
+            DividerWidget(),
           ],
         ),
       ),
-
+    );
+  }
+}
+class ChoiceMaker extends StatelessWidget {
+  final String text;
+  final Function()? onTap;
+  const ChoiceMaker({
+    required this.text,
+    required this.onTap
+});
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        HeadingText(text: text),
+        GestureDetector(
+          onTap: onTap,
+          child: iconWidget(),
+        ),
+      ],
+    );
+  }
+}
+class iconWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+        Icons.keyboard_arrow_right_rounded,
+      color: kMainThemeColor,
+      size: Dimensions.height40,
     );
   }
 }

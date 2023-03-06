@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/screens/forgot_password/forgot_password_screen.dart';
-import 'package:tiffin/screens/settings/components/notification_preferences/notification_preferences_screen.dart';
+import 'package:tiffin/utils/AppColors.dart';
 import 'package:tiffin/screens/sign_in/sign_in_screen.dart';
-import 'package:tiffin/screens/splash/components/Onboarding_controller.dart';
+import 'package:tiffin/widgets/default_button.dart';
+import 'package:tiffin/widgets/onboard_nav_btn.dart';
 import 'package:tiffin/screens/splash/components/onboarding_info.dart';
-import 'package:get/state_manager.dart';
-import 'package:tiffin/size_config.dart';
-
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -14,266 +14,165 @@ class OnboardingScreen extends StatefulWidget {
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
-
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final _controller = OnboardingController();
-  bool isLastPage=false;
+  int currentPage = 0;
+  PageController _pageController = PageController(initialPage : 0);
+
+  AnimatedContainer dotIndicator(index) {
+    return AnimatedContainer(
+      margin: EdgeInsets.only(right: Dimensions.width8),
+      duration: Duration(milliseconds: 400),
+      height: Dimensions.height10,
+      width: Dimensions.width10,
+      decoration: BoxDecoration(
+        color: currentPage == index ? kBlackColor : kIconColor,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
+    double sizeH = Dimensions.blockSizeH;
+    double sizeV = Dimensions.blockSizeV;
+    //print(sizeH);
     return Scaffold(
+      backgroundColor: Colors.white,
         body:SafeArea(
-          child:Stack(
+          child: Column(
             children:[
-              PageView.builder(
-                  controller: _controller.pageController,
-                  onPageChanged: _controller.selecetedPageIndex,
-                  itemCount: _controller.onboardingPages.length,
-                  itemBuilder: (context,index){
-                    if(index%2==0 && index!=4){
-                      print(index);
-                      return Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                             Align(
-                              alignment: Alignment.centerLeft,
-                              child:
-                              Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                child: Text(_controller.onboardingPages[index].title,
-                                  style:TextStyle(
-                                    fontSize:28,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(235,71,73,1.0),
-                                  ),
-                                ),
-                              ),
+             Expanded(
+               flex: 9,
+                  child:PageView.builder(
+                    controller: _pageController,
+                    onPageChanged: (value){
+                        setState(() {
+                          currentPage = value;
+                          });
+                     },
+                     itemCount: onboardingPages.length,
+                     itemBuilder: (context,index) {
+                       if (index % 2 == 0) {
+                         return Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             SizedBox(
+                               height: sizeV * 14,
                              ),
-                             SizedBox(height: 15,),
-                             Padding(
-                               padding: EdgeInsets.symmetric(horizontal: 20.0),
-                               child: Text(_controller.onboardingPages[index].description,
-                                style:TextStyle(
-                                  fontSize:16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(121,121,121,1.0),
-                                ),
+                             Text(
+                               onboardingPages[index].title,
+                               style: kH1Heading,
+                               //color: kBlackColor,
+                               //size: Dimensions.font26,
+                             ),
+                             SizedBox(
+                               height: sizeV * 3,
+                             ),
+                             SubHeadingText(
+                               text: onboardingPages[index].description,
+                               size: Dimensions.font14,
+                               //style: description,
+                               //textAlign: TextAlign.center,
+                             ),
+                             SizedBox(
+                               height: sizeV,
+                             ),
+                             Container(
+                               height: sizeV * 50,
+                               child: Image.asset(
+                                 onboardingPages[index].imageAsset,
+                                 fit: BoxFit.contain,
                                ),
                              ),
-                             SizedBox(height: 20,),
-                             Image.asset(
-                                _controller.onboardingPages[index].imageAsset,
-                                width: 600),
-                        //     Column(
-                        //       children:[
-                        //         Positioned(
-                        //         bottom: 160,
-                        //         left: 20,
-                        //         child: Row(
-                        //           children: List.generate(_controller.onboardingPages.length, (index) =>
-                        //               Obx(() {
-                        //                 return Container(
-                        //                   margin: EdgeInsets.all(4),
-                        //                   width: 10,
-                        //                   height: 10,
-                        //                   decoration: BoxDecoration(
-                        //                     color: _controller.selecetedPageIndex.value == index
-                        //                         ? Color.fromRGBO(235, 71, 73, 1.0)
-                        //                         : Color.fromRGBO(200, 200, 200, 1.0),
-                        //                     shape: BoxShape.circle,
-                        //                   ),);
-                        //               }),
-                        //           ),
-                        //         ),
-                        //       ),
-                        // ],
-                        //     ),
-                        //     Positioned(
-                        //       right: 20,
-                        //       bottom: 15,
-                        //       child: FloatingActionButton(
-                        //         elevation: 1,
-                        //         child: Icon(Icons.navigate_next,color: Colors.white,),
-                        //         onPressed: _controller.forwardAction,
-                        //         backgroundColor: Color.fromRGBO(235,71,73,1.0),
-                        //
-                        //       ),
-                        //     ),
-                          ],
-                      ),
-                    );
-                  }if(index==4){
-                      print("hellllllllllllllllllooooooooo");
-                      isLastPage=true;
-                      print(isLastPage);
-                      return Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child:
-                              Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                child: Text(_controller.onboardingPages[4].title,
-                                  style:TextStyle(
-                                    fontSize:28,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(235,71,73,1.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15,),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Text(_controller.onboardingPages[4].description,
-                                style:TextStyle(
-                                  fontSize:16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(121,121,121,1.0),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20,),
-                            Image.asset(
-                                _controller.onboardingPages[4].imageAsset,
-                                width: 600),
-                            Container(child:MaterialButton(
-                              onPressed: (){
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>SignInScreen()));
-                              },
-                              child: Text('Let\'s Get Started'),
-                            ),),
-                          ],
-                        ),
-                        //child: Text('Hello there'),
-                      );
-                    }
-                  else{
-                    return Container(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                _controller.onboardingPages[index].imageAsset,
-                                width: 600,
-                              ),
-                              SizedBox(height: 20,),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child:
-                                Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                  child:Text(_controller.onboardingPages[index].title,
-                                    style:TextStyle(
-                                      fontSize:28,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromRGBO(235,71,73,1.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 15,),
-                              Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),
-                                child: Text(_controller.onboardingPages[index].description,
-                                  style:TextStyle(
-                                    fontSize:16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(121,121,121,1.0),
-                                  ),
-                                ),
-                              ),
-                      //         Container(
-                      //           child:Positioned(
-                      //             bottom: 30,
-                      //             left: 20,
-                      //             child: Row(
-                      //               children: List.generate(_controller.onboardingPages.length, (index) =>
-                      //                   Obx(() {
-                      //                     return Container(
-                      //                       margin: EdgeInsets.all(4),
-                      //                       width: 10,
-                      //                       height: 10,
-                      //                       decoration: BoxDecoration(
-                      //                         color: _controller.selecetedPageIndex.value == index
-                      //                             ? Color.fromRGBO(235, 71, 73, 1.0)
-                      //                             : Color.fromRGBO(200, 200, 200, 1.0),
-                      //                         shape: BoxShape.circle,
-                      //                       ),);
-                      //                   }),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         Positioned(
-                      //           right: 20,
-                      //           bottom: 15,
-                      //           child: FloatingActionButton(
-                      //             elevation: 1,
-                      //             child: Icon(Icons.navigate_next,color: Colors.white,),
-                      //             onPressed: _controller.forwardAction,
-                      //             backgroundColor: Color.fromRGBO(235,71,73,1.0),
-                      //
-                      //           ),
-                      //         ),
-                            ],
-                        ),
-                      );
-                    }
-                  }
-              ),
-
-          // isLastPage?Container(child:MaterialButton(
-          //   onPressed: (){
-          //     Navigator.of(context).push(MaterialPageRoute(builder: (context) =>NotificationPreferenceScreen()));
-          //   },
-          //   child: Text('Let\'s Get Started'),
-          // ),):
-          Container(
-                child:Positioned(
-                  bottom: 30,
-                  left: 20,
-                  child: Row(
-                    children: List.generate(_controller.onboardingPages.length, (index) =>
-                        Obx(() {
-                          return Container(
-                            margin: EdgeInsets.all(4),
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                              color: _controller.selecetedPageIndex.value == index
-                                  ? Color.fromRGBO(235, 71, 73, 1.0)
-                                  : Color.fromRGBO(200, 200, 200, 1.0),
-                              shape: BoxShape.circle,
-                            ),);
-                        }),
-                    ),
+                             SizedBox(
+                               height: sizeV * 5,
+                             ),
+                           ],
+                         );
+                       }
+                       else {
+                         return Column(
+                           children: [
+                             SizedBox(
+                               height: sizeV * 14,
+                             ),
+                             Container(
+                               height: sizeV * 50,
+                               child: Image.asset(
+                                 onboardingPages[index].imageAsset,
+                                 fit: BoxFit.contain,
+                               ),
+                             ),
+                             HeadingText(
+                               text: onboardingPages[index].title,
+                               color: kBlackColor ,
+                               size: Dimensions.font26,
+                             ),
+                             SizedBox(
+                               height: sizeV * 3,
+                             ),
+                             SubHeadingText(
+                               text: onboardingPages[index].description,
+                               size: Dimensions.font14,
+                             ),
+                             SizedBox(
+                               height: sizeV * 5,
+                             ),
+                           ],
+                         );
+                       }
+                     }
                   ),
-                ),
-               ),
-            //     :Container(child:MaterialButton(
-          //   onPressed: (){
-          //     Navigator.of(context).push(MaterialPageRoute(builder: (context) =>NotificationPreferenceScreen()));
-          //   },
-          //   child: Text('Let\'s Get Started'),
-          // ),),
-              Positioned(
-                right: 20,
-                bottom: 15,
-                child: FloatingActionButton(
-                  elevation: 1,
-                  child: Icon(Icons.navigate_next,color: Colors.white,),
-                  onPressed: _controller.forwardAction,
-                  backgroundColor: Color.fromRGBO(235,71,73,1.0),
-
-                ),
+             ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    currentPage == onboardingPages.length - 1 ? DefaultButton(
+                    text: 'Let\'s Get Started',
+                    press: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignInScreen(),
+                          ));
+                      },
+                    ) : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      OnBoardNavBtn(
+                        name: 'Skip',
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignInScreen()));
+                        },
+                      ),
+                      Row(
+                        children: List.generate(
+                          onboardingPages.length,
+                              (index) => dotIndicator(index),
+                        ),
+                      ),
+                      OnBoardNavBtn(
+                        name: 'Next',
+                        onPressed: () {
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 400),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
-
+            ),
+          ],
+        ),
         ),
     );
-
   }
 }
+
+

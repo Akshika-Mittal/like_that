@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tiffin/screens/forgot_password/forgot_password_screen.dart';
-import 'package:tiffin/size_config.dart';
+import 'package:tiffin/utils/AppColors.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
+// import 'chat_support.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -8,214 +12,136 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromRGBO(242,242,242,1.0),
+      color: kAppBackgroundColor,
       child: Stack(
         children: <Widget>[
           Positioned(
-              top: 50,
+              top: Dimensions.height50,
               child: Container(
-                width : MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height-kToolbarHeight-kBottomNavigationBarHeight,
+                width : Dimensions.screenWidth,
+                height: Dimensions.screenHeight-kToolbarHeight-kBottomNavigationBarHeight,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: Color.fromRGBO(255,255,255,1.0),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: kWhiteColor,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left:15, top: 10),
-                  child: Text(
-                    'Customer Support',
-                     style:TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 26,
+                  padding: EdgeInsets.only(left:Dimensions.width15, top: Dimensions.height10),
+                  child: HeadingText(
+                    text: 'Customer Support',
+                    color: kBlackColor,
+                    size: Dimensions.font26,
                     ),
                   ),
                 ),
-              ),
           ),
           Positioned(
-            top: 120,
+            top: Dimensions.height120,
             child: Container(
-                width : MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height-kToolbarHeight-kBottomNavigationBarHeight,
+                width : Dimensions.screenWidth,
+                height: Dimensions.screenHeight-kToolbarHeight-kBottomNavigationBarHeight,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(242,242,242,1.0),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: kAppBackgroundColor,
                 ),
                 child: Stack(
-
                   children: <Widget>[
-                    Positioned(
-                      top:40,
-                      left: 0,
-                      child: TextButton(
-                        onPressed:(){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen()));
-                          },
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Color.fromRGBO(242,242,242,1.0)),
-                        ),
-                          child: Container(
-
-                          height: 80,
-                          width:MediaQuery.of(context).size.width-20,
-                          decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color.fromRGBO(255,255,255,1.0),
-                          ),
-                          child: Stack(
-
-                          children: <Widget>[
-                          Positioned(
-                          top:10,
-                          left:12,
-                          child: Text
-                        (
-                                  'Chat',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(104,102,102,1.0),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top:40,
-                                  left:12,
-                                  child: Text(
-                                    '9:00 AM - 9:00 PM',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,
-                                      color: Color.fromRGBO(104,102,102,1.0),
-                                    ),
-                                  ),
-                              ),
-                              Positioned(
-                                top:10,
-                                left:MediaQuery.of(context).size.width-90,
-                                child: Image.asset('assets/images/chat.png',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //Spacer(),
-
+                    // Positioned(
+                    //   top:Dimensions.height40,
+                    //   left: 0,
+                    //   // child: optionButton(
+                    //   //   // onPress: (){
+                    //   //   //   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>()));
+                    //   //   // },
+                    //   //   headingText: 'Chat',
+                    //   //   subHeadingText: '9:00 AM - 9:00 PM',
+                    //   //   imagePath: 'assets/images/chat.png',
+                    //   // ),
+                    // ),
                     Positioned(
                       top:130,
                       left: 0,
-                      child: TextButton(
-
-                        onPressed:(){
+                      child: optionButton(
+                        onPress:(){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen()));
                         },
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Color.fromRGBO(242,242,242,1.0)),
-                        ),
-                        child: Container(
-                          height: 80,
-                          width:MediaQuery.of(context).size.width-20,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(255,255,255,1.0),
-                          ),
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                top:10,
-                                left:12,
-                                child: Text(
-                                  'Contact Us',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(104,102,102,1.0),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top:45,
-                                left:12,
-                                child: Text(
-                                  '9:00 AM - 9:00 PM',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.normal,
-                                    color: Color.fromRGBO(104,102,102,1.0),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top:10,
-                                left:MediaQuery.of(context).size.width-90,
-                                child: Image.asset('assets/images/phone.png',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        headingText:'Contact Us',
+                        subHeadingText:'9:00 AM - 9:00 PM',
+                        imagePath:'assets/images/phone.png',
                       ),
                     ),
-
-
-                    //Spacer(),
-
                     Positioned(
                       top:220,
                       left: 0,
-                      child: TextButton(
-                        onPressed: (){
+                      child: optionButton(
+                        onPress: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen()));
                         },
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(Color.fromRGBO(242,242,242,1.0)),
-                        ),
-                        child: Container(
-                          height: 80,
-                          width:MediaQuery.of(context).size.width-20,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(255,255,255,1.0),
-                          ),
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                top:10,
-                                left:12,
-                                child: Text(
-                                  'Write to us',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(104,102,102,1.0),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                top:10,
-                                left:MediaQuery.of(context).size.width-90,
-                                child: Image.asset('assets/images/mail.png',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        headingText: 'Write to us',
+                        imagePath: 'assets/images/mail.png',
                       ),
                     ),
-
-
                   ],
                 ),
               ),
             ),
          // ),
         ],
+      ),
+    );
+  }
+}
+
+class optionButton extends StatelessWidget {
+  final Function()? onPress;
+  final String headingText;
+  final String subHeadingText;
+  final String imagePath;
+
+  const optionButton({
+    required this.onPress,
+    required this.headingText,
+    this.subHeadingText="",
+    required this.imagePath,
+});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPress,
+      style: ButtonStyle(
+        overlayColor: MaterialStateProperty.all(kAppBackgroundColor),
+        ),
+        child: Container(
+          height: Dimensions.height80,
+          width:MediaQuery.of(context).size.width-20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimensions.radius10),
+            color: kWhiteColor,
+          ),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top:Dimensions.height10,
+                left:Dimensions.width12,
+                child: HeadingText(
+                text: headingText,
+                size: Dimensions.font26,
+                ),
+              ),
+            Positioned(
+              top:Dimensions.height40,
+              left:Dimensions.width12,
+                child: SubHeadingText(
+                  text:subHeadingText,
+                  ),
+                ),
+            Positioned(
+              top:Dimensions.height10,
+              left:MediaQuery.of(context).size.width-90,
+              child: Image.asset(imagePath,),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/constants.dart';
+import 'package:tiffin/utils/constants.dart';
 import 'package:tiffin/screens/complete_profile/components/complete_profille_form.dart';
-import 'package:tiffin/size_config.dart';
+import 'package:tiffin/utils/size_config.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);

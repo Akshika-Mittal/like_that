@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/custom_suffix_icon.dart';
-import 'package:tiffin/components/default_button.dart';
+import 'package:tiffin/widgets/custom_suffix_icon.dart';
+import 'package:tiffin/widgets/default_button.dart';
 import 'package:tiffin/components/form_error.dart';
-import 'package:tiffin/constants.dart';
+import 'package:tiffin/utils/constants.dart';
 import 'package:tiffin/screens/otp/otp_screen.dart';
-import 'package:tiffin/size_config.dart';
+import 'package:tiffin/utils/size_config.dart';
 
 class CompleteProfileForm extends StatefulWidget {
   @override

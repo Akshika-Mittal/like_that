@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tiffin/utils/AppColors.dart';
+import 'package:tiffin/widgets/divider_widget.dart';
 import 'package:tiffin/components/menu_items.dart';
-import 'package:tiffin/components/user_page.dart';
 import 'package:tiffin/screens/about_us/about_us_screen.dart';
 import 'package:tiffin/screens/cancellation_policy/cancellation_policy_screen.dart';
 import 'package:tiffin/screens/customer_support/customer_support_screen.dart';
+import 'package:tiffin/screens/feedback/feedback_screen.dart';
 import 'package:tiffin/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tiffin/screens/polling/menu_selection/menu_selection_screen.dart';
+import 'package:tiffin/screens/polling/polling_result/result_accepted_screen.dart';
 import 'package:tiffin/screens/settings/settings_screen.dart';
 import 'package:tiffin/screens/subscription_plan/subscription_plan_screen.dart';
 
@@ -22,7 +25,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.60,
-        color: Color.fromRGBO(230, 230, 230, 1.0),
+        color: kDrawerBgColor,
         padding: EdgeInsets.only(top: 70, left: 20, right: 20),
         child: Column(
           children: [
@@ -30,7 +33,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.white,
+                  color: kWhiteColor,
                 ),
                 child: Column(
                   children: [
@@ -56,18 +59,14 @@ class NavigationDrawerWidget extends StatelessWidget {
                                   Text(name, style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black,
+                                    color: kBlackColor,
                                   )),
                                   Text(customerId),
                                   SizedBox(
                                     width: 20,),
-                                  Divider(
-                                    color: Colors.grey,
-                                    thickness: 2,
-                                    //height: 3
-                                  ),
+                                  DividerWidget(),
                                   Text(mobileNo.toString()),
-                                  Divider(color: Colors.grey, thickness: 2,),
+                                  DividerWidget(),
                                   Text(address),
                                 ],
                               ),
@@ -89,7 +88,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.white,
+                          color: kWhiteColor,
                          ),
                          padding: EdgeInsets.only(left: 10, right: 10),
                          height: 50,
@@ -99,9 +98,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                            },
                            child: Row(
                             children:[
-                              Icon(element['icon'],color: Color.fromRGBO(199, 199, 199, 1.0),),
+                              Icon(element['icon'],color: kMainThemeColor,),
                               SizedBox(width:5,),
-                              Text(element['title'],style: TextStyle( color: Colors.black, fontSize: 16),),]
+                              Text(element['title'],style: TextStyle( color: kBlackColor, fontSize: 16),),]
                              ),
                          ),
                       ),
@@ -133,7 +132,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         ));
         break;
       case 2:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen(),
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ResultAcceptedScreen(),
         ));
         break;
       case 3:
@@ -141,7 +140,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         ));
         break;
       case 4:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>ForgotPasswordScreen(),
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>FeedbackScreen(),
         ));
         break;
       case 5:
@@ -182,7 +181,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    style: TextStyle(fontSize: 20, color: kBlackColor),
                   ),
                   const SizedBox(height: 4),
                   // Text(
@@ -192,7 +191,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                 ],
               ),
               Spacer(),
-
             ],
           ),
         ),

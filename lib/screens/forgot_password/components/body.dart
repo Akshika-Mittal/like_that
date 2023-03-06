@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/custom_suffix_icon.dart';
-import 'package:tiffin/components/default_button.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/custom_suffix_icon.dart';
+import 'package:tiffin/widgets/default_button.dart';
 import 'package:tiffin/components/form_error.dart';
 import 'package:tiffin/components/no_account_text.dart';
-import 'package:tiffin/constants.dart';
-import 'package:tiffin/size_config.dart';
+import 'package:tiffin/utils/constants.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -14,23 +16,19 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          EdgeInsets.symmetric(horizontal: Dimensions.width20),
           child: Column(
             children: [
-              SizedBox(height: SizeConfig.screenHeight * 0.04),
-              Text(
-                "Forgot Password",
-                style: TextStyle(
-                  fontSize: getProportionateScreenWidth(28),
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+              SizedBox(height: Dimensions.height25),
+              HeadingText(
+                text: "Forgot Password",
+                size: Dimensions.font26,
+                //color: kBlackColor,
               ),
-              Text(
-                "Please enter your email and we will send \nyou a link to return to your account",
-                textAlign: TextAlign.center,
+              SubHeadingText(
+                  text:"Please enter your email and we will send \nyou a link to return to your account",
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.1),
+              SizedBox(height: Dimensions.height10),
               ForgotPassForm(),
             ],
           ),
@@ -91,9 +89,9 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/mail.png"),
             ),
           ),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: Dimensions.height30),
           FormError(errors: errors),
-          SizedBox(height: SizeConfig.screenHeight * 0.1),
+          SizedBox(height: Dimensions.height10),
           DefaultButton(
             text: "Continue",
             press: () {
@@ -102,7 +100,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               }
             },
           ),
-          SizedBox(height: SizeConfig.screenHeight * 0.1),
+          SizedBox(height: Dimensions.height10),
           NoAccountText(),
         ],
       ),

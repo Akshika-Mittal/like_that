@@ -1,71 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/default_button.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/default_button.dart';
+import 'package:tiffin/widgets/divider_widget.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/screen_heading.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
 import 'package:tiffin/screens/settings/settings_screen.dart';
-
+import 'package:tiffin/utils/size_config.dart';
 class NotificationPreferenceScreen extends StatefulWidget {
   static String routeName = "/notification_preference";
-
   @override
   State<NotificationPreferenceScreen> createState() => _NotificationPreferenceScreenState();
 }
-
 class _NotificationPreferenceScreenState extends State<NotificationPreferenceScreen> {
   bool valuefirst = false;
-
   bool valuesecond = false;
-
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Notification Preferences",
-          style: TextStyle(
-            color: Color.fromRGBO(126,131, 137, 1),
-          ),
-        ),
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(Dimensions.appBarPrefferedHeight),
+        child: Screen_Heading(text: 'Notification Preferences',),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(vertical: Dimensions.height8,horizontal: Dimensions.width8),
         child: Column(
           children: <Widget>[
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
-            CheckboxListTile(
-              title: Text("Promos and Offers"),
-              subtitle: Text("Receive coupons, promotions and money saving offers"),
-              value: this.valuefirst,
-              onChanged:(bool? value) {
-                setState(() {
-                  this.valuefirst = value!;
-                });
-              },
-            ),
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
-            CheckboxListTile(
-
-                title: Text("Orders and Purchases"),
-              subtitle: Text("Receive updates related to your order status,membership and more"),
-              value: this.valuesecond,
-              onChanged:(bool? value) {
-                setState(() {
-                  this.valuesecond = value!;
-                });
-              },
-            ),
-            Divider(
-              color: Color.fromRGBO(126, 131, 137, 0.2),
-              thickness: 2,
-            ),
+            DividerWidget(),
+            buildCheckboxListTile('Promos and Offers','Receive coupons, promotions and money saving offers'),
+            DividerWidget(),
+            buildCheckboxListTile("Orders and Purchases","Receive updates related to your order status,membership and more"),
+            DividerWidget(),
             Spacer(),
             Padding(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.symmetric(vertical: Dimensions.height30,horizontal: Dimensions.width30),
               child: DefaultButton(
                 text: "Save Changes",
                 press: (){
@@ -74,12 +43,23 @@ class _NotificationPreferenceScreenState extends State<NotificationPreferenceScr
               ),
             ),
             SizedBox(
-              height: 30,
+              height: Dimensions.height30,
             ),
           ],
         ),
       ),
-
     );
   }
+  CheckboxListTile buildCheckboxListTile(String title,String subtitle) {
+    return CheckboxListTile(
+            title: HeadingText(text: title),
+            subtitle: SubHeadingText(text: subtitle),
+            value: this.valuefirst,
+            onChanged:(bool? value) {
+              setState(() {
+                this.valuefirst = value!;
+              });
+            },
+      );
+    }
 }

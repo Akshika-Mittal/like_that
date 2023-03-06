@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/custom_bottom_nav_bar.dart';
-import 'package:tiffin/enums.dart';
-
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/screen_heading.dart';
 import '../subscription_plan/components/body.dart';
-
 class SubscriptionPlanScreen extends StatelessWidget {
   static String routeName ="/subscription_plan";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Tiff Subscription Plan',
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
+      appBar: PreferredSize(
+          preferredSize:  Size.fromHeight(Dimensions.appBarPrefferedHeight),
+          child: Screen_Heading(text: 'Tiff Subscription Plan',)),
       body: Body(),
-      //bottomNavigationBar: CustomBottomNavBar(selectedMenu:MenuState.home),
     );
   }
 }

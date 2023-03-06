@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/screen_heading.dart';
 import 'package:tiffin/screens/about_us/components/body.dart';
-
 class AboutUs extends StatelessWidget {
   static String routeName = "/about_us";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        //leading: null,
-        title:Text(
-            "About Us",
-            //textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color.fromRGBO(126,131, 137, 1),
-            ),
-          ),
-        ),
+      appBar:PreferredSize(
+        preferredSize:Size.fromHeight(Dimensions.appBarPrefferedHeight),
+        child: Screen_Heading(text: 'About Us',),
+      ),
       body: Body(),
     );
   }

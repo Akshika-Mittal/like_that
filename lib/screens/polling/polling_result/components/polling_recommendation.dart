@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tiffin/utils/AppColors.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/AppBarWidget.dart';
 import 'package:tiffin/components/custom_bottom_nav_bar.dart';
-import 'package:tiffin/components/default_button.dart';
 import 'package:tiffin/components/navigation_drawer.dart';
-import 'package:tiffin/constants.dart';
+import 'package:tiffin/utils/constants.dart';
 import 'package:tiffin/enums.dart';
-import 'package:tiffin/screens/login_success/login_success_screen.dart';
+import 'package:tiffin/screens/home/home_screen.dart';
+import 'package:tiffin/widgets/heading_text.dart';
+import 'package:tiffin/widgets/sub_heading_text.dart';
 
 class PollingRecommendation extends StatefulWidget {
   static String routeName = "/polling_recommendation";
@@ -17,6 +21,7 @@ class _PollingRecommendationState extends State<PollingRecommendation> {
  String foodTypeValue = 'Select food type';
  String foodCategoryValue = 'Select food category';
  bool isActive = true;
+ bool _btnActive=false;
  late TextEditingController controller;
   @override
 
@@ -42,77 +47,53 @@ class _PollingRecommendationState extends State<PollingRecommendation> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawerWidget(),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 2,
-        title: Center(
-          child: Image.asset('assets/images/title.png',
-            fit: BoxFit.contain,
-            //alignment: Alignment.center,
-            height: 72,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add_alert,
-              color: Colors.redAccent,
-            ),
-            tooltip: 'Show Snackbar',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('This is a snackbar')));
-            },
-          ),
-        ],
-        iconTheme: IconThemeData(color: Colors.redAccent),
+      appBar:PreferredSize(
+        preferredSize: Size.fromHeight(Dimensions.appBarPrefferedHeight),
+        child: AppBarWidget(),
       ),
       body: Container(
-        color: Color.fromRGBO(242, 242, 242, 1),
+        color: kAppBackgroundColor,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width12 ,vertical: Dimensions.height12),
           child: Form(
             key:_formKey,
             child: Column(
               children: <Widget>[
-                SizedBox(height: 20,),
-                Text(
-                  'Recommend',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'Add your item in the recommended text field, we will try to add these items in the future polls.',
-                  style: TextStyle(
-                    color: Color.fromRGBO(124, 124, 124, 1),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
+                SizedBox(height: Dimensions.height20,),
+                HeadingText(
+                  text:'Recommend',
+                  size: Dimensions.font26,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: Dimensions.height10,
+                ),
+                SubHeadingText(
+                  text: 'Add your item in the recommended text field, we will try to add these items in the future polls.',
+                  size: Dimensions.font14,
+                  ),
+                SizedBox(
+                  height: Dimensions.height20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.width8,vertical: Dimensions.height8),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      color: kWhiteColor,
+                      borderRadius: BorderRadius.circular(Dimensions.height10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 7),
+                      padding: EdgeInsets.symmetric(horizontal: Dimensions.width8),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           value: foodTypeValue,
                           icon: const Icon(Icons.arrow_drop_down,
-                          color:kPrimaryColor,
+                          color:kMainThemeColor,
                         ),
-                        iconSize: 36,
+                        iconSize: Dimensions.height30,
                         elevation: 16,
                         isExpanded: true,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(138, 135, 135, 1),
+                        style: TextStyle(
+                          color: kTextColor,
                           fontWeight: FontWeight.w400,
                           fontSize: 18
                         ),
@@ -151,8 +132,8 @@ class _PollingRecommendationState extends State<PollingRecommendation> {
                           iconSize: 36,
                           elevation: 16,
                           isExpanded: true,
-                          style: const TextStyle(
-                              color: Color.fromRGBO(138, 135, 135, 1),
+                          style: TextStyle(
+                              color: kTextColor,
                               fontWeight: FontWeight.w400,
                               fontSize: 18
                           ),
@@ -174,50 +155,33 @@ class _PollingRecommendationState extends State<PollingRecommendation> {
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                Container(
+                  height: 70,
+
                   child: TextField(
-                    maxLines: 5,
-                    // keyboardType: TextInputType.emailAddress,
-                    // onSaved: (newValue) => email = newValue!,
-                    // onChanged: (value){
-                    //   if(value.isNotEmpty && errors.contains(kEmailNullError)){
-                    //     setState(() {
-                    //       errors.remove(kEmailNullError);
-                    //     });
-                    //   }
-                    //   else if(emailValidatorRegExp.hasMatch(value) && errors.contains(kInvalidEmailError)){
-                    //     setState(() {
-                    //       errors.remove(kInvalidEmailError);
-                    //     });
-                    //   }
-                    //   return null;
-                    // },
-                    // validator: (value){
-                    //   if(value!.isEmpty && !errors.contains(kEmailNullError)){
-                    //     setState(() {
-                    //       errors.add(kEmailNullError);
-                    //     });
-                    //   }
-                    //   else if(!emailValidatorRegExp.hasMatch(value) && !errors.contains(kInvalidEmailError)){
-                    //     setState(() {
-                    //       errors.add(kInvalidEmailError);
-                    //     });
-                    //   }
-                    //   return null;
-                    // },
-                    //textAlign: TextAlign.end,
-                    decoration:
-                    InputDecoration(
+                    onChanged: (value){
+                      setState(() {
+                        _btnActive=value.length>=1? true :false;
+                      });
+
+                    },
+                    maxLines: 1,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
                       filled: true,
-                        //icon: Icon(Icons.create),
-                      suffixIcon:Icon(Icons.create,
-                      color: kPrimaryColor,
+
+                      suffixIcon: Align(
+                       // alignment: Alignment.topRight,
+                        widthFactor: 1.0,
+                        heightFactor: 1.0,
+                        child:   Icon(Icons.create,color: kMainThemeColor, ),
                       ),
-                        hintTextDirection: TextDirection.rtl,
-                        fillColor: Colors.white,
+                      hintTextDirection: TextDirection.rtl,
+                        fillColor: kWhiteColor,
+
                         hintText: 'Type your food recommendation',
                       hintStyle: TextStyle(
+                              color: kAppBackgroundColor,
                       ),
                       border: OutlineInputBorder(
                       ),
@@ -228,23 +192,111 @@ class _PollingRecommendationState extends State<PollingRecommendation> {
 
                 Spacer(),
 
-                DefaultButton(
-                  text: "Continue",
-                  press: (){
-                    if(_formKey.currentState!.validate()){
-                      _formKey.currentState!.save();
-                      //KeyboardUtil.hideKeyboard(context);
-                      Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-                    }
-                  },
-                ),
-              ],
+              SizedBox(
+          width: double.infinity,
+          height: Dimensions.width56,
+          child: OutlinedButton(
+            style:OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+              ),
+              primary:  _btnActive==true? kMainThemeColor:kAppBackgroundColor,
+            ),
+
+
+            onPressed: () {
+              _btnActive==true? _recommend():null;
+
+            },
+            child: HeadingText(
+              text:'Recommend',
+              size: Dimensions.font45,
+                color: kWhiteColor,
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu:MenuState.home),
+      ],
+    ),),
+        ),),
+      bottomNavigationBar: CustomBottomNavBar(selectedMenu:MenuState.none),
       //bottomNavigationBar:
+    );
+
+
+  }
+  void _recommend(){
+    setState(() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Dimensions.radius10),
+            ),
+            title: HeadingText(
+              text:'Thank you!',
+              size: Dimensions.font26,
+              color: kBlackColor,
+            ),
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: [
+                  new SubHeadingText(
+                    text: 'We have received your recommendation. You will receive an email when the item will be included in the poll.',
+                    color: kBlackColor,
+                    ),
+                ],
+              ),
+            ),
+            actions: [
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buttonWidget(
+                      text:'Proceed',
+                      onPress:() {Navigator.of(context).pop();},
+                    ),
+                    buttonWidget(
+                      text:'Back',
+                      onPress:() {
+                        Navigator.pushNamed(context, HomeScreen.routeName);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+}
+
+class buttonWidget extends StatelessWidget {
+  const buttonWidget({
+    required this.text,
+    required this.onPress
+  });
+  final String text;
+  final Function() onPress;
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Dimensions.radius10),
+        ),
+        primary: kWhiteColor,
+      ),
+
+      child: HeadingText(
+        text:text,
+        size: Dimensions.font26,
+        color: kMainThemeColor,
+      ),
+      onPressed: onPress,
     );
   }
 }

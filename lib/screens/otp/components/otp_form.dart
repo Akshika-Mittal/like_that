@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tiffin/components/default_button.dart';
-import 'package:tiffin/constants.dart';
-import 'package:tiffin/size_config.dart';
+import 'package:tiffin/utils/dimensions.dart';
+import 'package:tiffin/widgets/default_button.dart';
+import 'package:tiffin/utils/constants.dart';
+import 'package:tiffin/screens/home/home_screen.dart';
+import 'package:tiffin/utils/size_config.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
@@ -41,77 +43,72 @@ class _OtpFormState extends State<OtpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        children: [
-          SizedBox(height: SizeConfig.screenHeight * 0.15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  autofocus: true,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) {
-                    nextField(value, pin2FocusNode);
-                  },
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin2FocusNode,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin3FocusNode),
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin3FocusNode,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) => nextField(value, pin4FocusNode),
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(60),
-                child: TextFormField(
-                  focusNode: pin4FocusNode,
-                  obscureText: true,
-                  style: TextStyle(fontSize: 24),
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: otpInputDecoration,
-                  onChanged: (value) {
-                    if (value.length == 1) {
-                      pin4FocusNode!.unfocus();
-                      // Then you need to check is the code is correct or not
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: SizeConfig.screenHeight * 0.15),
-          DefaultButton(
-            text: "Continue",
-            press: () {},
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        Text(
+          'Hello',
+        ),
+         SizedBox(height: 15),
+         Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextFormField(
+              autofocus: true,
+              obscureText: true,
+              style: TextStyle(fontSize: 24),
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: otpInputDecoration,
+              onChanged: (value) {
+                nextField(value, pin2FocusNode);
+              },
+            ),
+        //     // SizedBox(
+        //     //   width: 5,
+        //     //   child: TextFormField(
+        //     //     focusNode: pin2FocusNode,
+        //     //     obscureText: true,
+        //     //     style: TextStyle(fontSize: 24),
+        //     //     keyboardType: TextInputType.number,
+        //     //     textAlign: TextAlign.center,
+        //     //     decoration: otpInputDecoration,
+        //     //     onChanged: (value) => nextField(value, pin3FocusNode),
+        //     //   ),
+        //     // ),
+        //     // SizedBox(
+        //     //   width: 5,
+        //     //   child: TextFormField(
+        //     //     focusNode: pin3FocusNode,
+        //     //     obscureText: true,
+        //     //     style: TextStyle(fontSize: 24),
+        //     //     keyboardType: TextInputType.number,
+        //     //     textAlign: TextAlign.center,
+        //     //     decoration: otpInputDecoration,
+        //     //     onChanged: (value) => nextField(value, pin4FocusNode),
+        //     //   ),
+        //     // ),
+        //     // SizedBox(
+        //     //   width: 5,
+        //     //   child: TextFormField(
+        //     //     focusNode: pin4FocusNode,
+        //     //     obscureText: true,
+        //     //     style: TextStyle(fontSize: 24),
+        //     //     keyboardType: TextInputType.number,
+        //     //     textAlign: TextAlign.center,
+        //     //     decoration: otpInputDecoration,
+        //     //     onChanged: (value) {
+        //     //       if (value.length == 1) {
+        //     //         pin4FocusNode!.unfocus();
+        //     //         // Then you need to check is the code is correct or not
+        //     //       }
+        //     //     },
+        //     //   ),
+        //     // ),
+         ],
+         ),
+        // SizedBox(height:15),
+
+      ],
     );
   }
 }
